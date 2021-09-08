@@ -176,6 +176,14 @@ button {
   color: var(--light-grayish-blue-dk-hover);
 }
 
+.checked-text {
+  text-decoration: line-through;
+}
+
+.remove-todo {
+  cursor: pointer;
+}
+
 .todo-filters {
   color: var(--very-dark-grayish-blue-dk);
 }
@@ -188,8 +196,4 @@ button {
 
 .main-filters {
   border-radius: 6px;
-}
-
-.checked-text {
-  text-decoration: line-through;
 }
