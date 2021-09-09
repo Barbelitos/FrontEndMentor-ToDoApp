@@ -1,3 +1,5 @@
+/**** Variables ****/
+
 :root {
   /*** Fonts ***/
   --josefin-sans: "Josefin Sans", sans-serif;
@@ -26,6 +28,8 @@
   --very-dark-grayish-blue-dk: hsl(233, 14%, 35%);
   --very-dark-grayish-blue-dk2: hsl(237, 14%, 26%);
 }
+
+/**** General Rules ****/
 
 *,
 *::before,
@@ -73,6 +77,8 @@ button {
   justify-content: space-between;
 }
 
+/**** Header ****/
+
 .logo {
   display: flex;
   justify-content: space-between;
@@ -111,6 +117,8 @@ button {
   color: var(--light-grayish-blue-dk);
   width: 87%;
 }
+
+/**** Main ****/
 
 .todo-list {
   margin-top: 15px;
@@ -184,6 +192,8 @@ button {
   cursor: pointer;
 }
 
+/**** Filters ****/
+
 .todo-filters {
   color: var(--very-dark-grayish-blue-dk);
 }
@@ -196,4 +206,16 @@ button {
 
 .main-filters {
   border-radius: 6px;
+}
+
+.filter-radio {
+  display: none;
+}
+
+.filter-label {
+  cursor: pointer;
+}
+
+.filter-radio:checked + .filter-label {
+  color: var(--bright-blue);
 }

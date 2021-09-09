@@ -6,17 +6,20 @@ var todoList = document.querySelector(".todo-list");
 
 var todoItem = document.querySelectorAll(".todo-item");
 
-var checkButton = document.querySelectorAll(".todo-li");
+// var checkButton = document.querySelectorAll(".todo-li");
 
 var todoText = document.querySelectorAll(".todo-text");
 
 var removeButton = document.querySelectorAll(".remove-todo");
+
+var counter = document.querySelector(".items-left");
 
 //Event Handlers
 createTodo.addEventListener("keypress", (e) => {
   if (e.key === "Enter" && createTodo.value != "") {
     addTodo(createTodo.value);
     createTodo.value = "";
+    updateCounter();
   }
 });
 
@@ -27,6 +30,7 @@ todoList.addEventListener("click", (e) => {
 
   if (e.target.classList[0] === "remove-todo") {
     e.target.parentElement.remove();
+    updateCounter();
   }
 });
 
@@ -41,4 +45,10 @@ function addTodo(todo) {
   li.classList.add("todo-item");
   li.classList.add("item");
   todoList.appendChild(li);
+}
+
+function updateCounter() {
+  const count = todoList.childElementCount;
+
+  counter.innerHTML = count;
 }
