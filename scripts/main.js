@@ -3,22 +3,41 @@
 // Selectors
 
 const createTodo = document.getElementById("create-todo");
-
 const todoList = document.querySelector(".todo-list");
-
 const todoItem = document.querySelectorAll(".todo-item");
-
 const todoText = document.querySelectorAll(".todo-text");
-
 const removeButton = document.querySelectorAll(".remove-todo");
-
 const counter = document.querySelector(".items-left");
-
 const clearDone = document.querySelector(".clear-completed");
 
+const showAll = document.getElementById("all");
+const showActive = document.getElementById("active");
+const showCompleted = document.getElementById("completed");
+
+// Lists
 let todos = [];
 let completed = [];
 let active = [];
+
+// Functions
+
+function addTodo(todo) {
+  let li = document.createElement("li");
+
+  li.innerHTML = `
+    <label class="task"><input type="checkbox" name="checkButton" class="todo-li" /><span class="checkmark"></span></label><p class="todo-text">${todo}</p><img class="remove-todo" src="./images/icon-cross.svg" alt="delete todo" />
+    `;
+  li.classList.add("item");
+  li.classList.add("todo-item");
+  todos.push(li);
+  todoList.appendChild(li);
+}
+
+function updateCounter() {
+  const count = todoList.childElementCount;
+
+  counter.innerHTML = count;
+}
 
 updateCounter();
 
@@ -63,22 +82,28 @@ clearDone.addEventListener("click", () => {
   updateCounter();
 });
 
-// Functions
+showAll.addEventListener("click", () => {
+  for (let i = 0; i < todos.length; i++) {
+    todos[i].style.display = "flex";
+  }
+});
 
-function addTodo(todo) {
-  let li = document.createElement("li");
+showActive.addEventListener("click", () => {
+  for (let i = 0; i < todos.length; i++) {
+    if (todos[i].classList.contains("checked-item")) {
+      todos[i].style.display = "none";
+    } else {
+      todos[i].style.display = "flex";
+    }
+  }
+});
 
-  li.innerHTML = `
-    <label class="task"><input type="checkbox" name="checkButton" class="todo-li" /><span class="checkmark"></span></label><p class="todo-text">${todo}</p><img class="remove-todo" src="./images/icon-cross.svg" alt="delete todo" />
-    `;
-  li.classList.add("item");
-  li.classList.add("todo-item");
-  todos.push(li);
-  todoList.appendChild(li);
-}
-
-function updateCounter() {
-  const count = todoList.childElementCount;
-
-  counter.innerHTML = count;
-}
+showCompleted.addEventListener("click", () => {
+  for (let i = 0; i < todos.length; i++) {
+    if (!todos[i].classList.contains("checked-item")) {
+      todos[i].style.display = "none";
+    } else {
+      todos[i].style.display = "flex";
+    }
+  }
+});

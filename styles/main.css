@@ -58,6 +58,7 @@ button {
   font-family: var(--josefin-sans);
   color: var(--very-dark-grayish-blue-dk);
   font-size: 0.8rem;
+  cursor: pointer;
 }
 
 .container {
