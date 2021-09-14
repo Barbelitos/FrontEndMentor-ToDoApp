@@ -1,21 +1,29 @@
-// Variables
+"use strict";
 
-var createTodo = document.getElementById("create-todo");
+// Selectors
 
-var todoList = document.querySelector(".todo-list");
+const createTodo = document.getElementById("create-todo");
 
-var todoItem = document.querySelectorAll(".todo-item");
+const todoList = document.querySelector(".todo-list");
 
-// var checkButton = document.querySelectorAll(".todo-li");
+const todoItem = document.querySelectorAll(".todo-item");
 
-var todoText = document.querySelectorAll(".todo-text");
+const todoText = document.querySelectorAll(".todo-text");
 
-var removeButton = document.querySelectorAll(".remove-todo");
+const removeButton = document.querySelectorAll(".remove-todo");
 
-var counter = document.querySelector(".items-left");
+const counter = document.querySelector(".items-left");
+
+const clearDone = document.querySelector(".clear-completed");
+
+let todos = [];
+let completed = [];
+let active = [];
+
+updateCounter();
 
 //Event Handlers
-createTodo.addEventListener("keypress", (e) => {
+createTodo.addEventListener("keydown", (e) => {
   if (e.key === "Enter" && createTodo.value != "") {
     addTodo(createTodo.value);
     createTodo.value = "";
@@ -26,12 +34,33 @@ createTodo.addEventListener("keypress", (e) => {
 todoList.addEventListener("click", (e) => {
   if (e.target.name === "checkButton") {
     e.target.parentElement.nextElementSibling.classList.toggle("checked-text");
+    e.target.parentElement.parentElement.classList.toggle("checked-item");
+    if (
+      e.target.parentElement.parentElement.classList.contains("checked-item")
+    ) {
+      completed.push(e.target.parentElement.parentElement);
+    }
   }
 
   if (e.target.classList[0] === "remove-todo") {
     e.target.parentElement.remove();
     updateCounter();
   }
+});
+
+clearDone.addEventListener("click", () => {
+  for (let i = 0; i < todos.length; i++) {
+    if (todos[i].classList.contains("checked-item")) {
+      if (completed.includes(todos[i])) {
+        todos[i].remove();
+      }
+    }
+  }
+  todos = todos.filter((el) => {
+    return !completed.includes(el);
+  });
+  completed = [];
+  updateCounter();
 });
 
 // Functions
@@ -42,8 +71,9 @@ function addTodo(todo) {
   li.innerHTML = `
     <label class="task"><input type="checkbox" name="checkButton" class="todo-li" /><span class="checkmark"></span></label><p class="todo-text">${todo}</p><img class="remove-todo" src="./images/icon-cross.svg" alt="delete todo" />
     `;
-  li.classList.add("todo-item");
   li.classList.add("item");
+  li.classList.add("todo-item");
+  todos.push(li);
   todoList.appendChild(li);
 }
 

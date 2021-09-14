@@ -186,6 +186,7 @@ button {
 
 .checked-text {
   text-decoration: line-through;
+  color: var(--very-dark-grayish-blue-dk);
 }
 
 .remove-todo {
@@ -206,6 +207,8 @@ button {
 
 .main-filters {
   border-radius: 6px;
+  justify-content: center;
+  gap: 1em;
 }
 
 .filter-radio {
