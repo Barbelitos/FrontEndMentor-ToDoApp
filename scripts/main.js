@@ -1,6 +1,6 @@
 'use strict';
 
-// Selectors
+/* --------- Selectors ----------    */
 const createTodo = document.getElementById('create-todo');
 const todoList = document.querySelector('.todo-list');
 const todoItem = document.querySelectorAll('.todo-item');
@@ -13,12 +13,16 @@ const showAll = document.getElementById('all');
 const showActive = document.getElementById('active');
 const showCompleted = document.getElementById('completed');
 
-// Lists Arrays
+const lightBtn = document.querySelector('.light-mode-icon');
+const darkBtn = document.querySelector('.dark-mode-icon');
+const items = document.querySelectorAll('.item');
+
+/* --------- Lists Arrays ----------    */
 let todos = [];
 let active = [];
 let completed = [];
 
-// Functions
+/* --------- Functions ----------    */
 const addTodo = function (todo) {
   const li = document.createElement('li');
 
@@ -29,13 +33,19 @@ const addTodo = function (todo) {
   li.classList.add('item');
   li.classList.add('todo-item');
 
-  if (showCompleted.checked) {
-    li.style.display = 'none';
-  }
+  if (showCompleted.checked) li.style.display = 'none';
 
   todos.push(li);
   active.push(li);
   todoList.appendChild(li);
+
+  if (document.body.classList.contains('light')) {
+    li.classList.add('light');
+    li.children[1].classList.add('light');
+  } else {
+    li.classList.remove('light');
+    li.children[1].classList.remove('light');
+  }
 };
 
 const updateCounter = () => {
@@ -58,7 +68,7 @@ const renderActive = () => {
 
 const renderAll = () => todos.map(todo => (todo.style.display = 'flex'));
 
-//Event Handlers
+/* --------- Event Handlers ----------    */
 createTodo.addEventListener('keydown', e => {
   if (!createTodo.value) return;
 
@@ -101,3 +111,30 @@ clearDone.addEventListener('click', () => {
 showCompleted.addEventListener('click', renderCompleted);
 showActive.addEventListener('click', renderActive);
 showAll.addEventListener('click', renderAll);
+
+lightBtn.addEventListener('click', () => {
+  document.body.classList.add('light');
+  lightBtn.style.display = 'none';
+  darkBtn.style.display = 'block';
+  items.forEach(item => {
+    item.classList.add('light');
+  });
+
+  todos.forEach(todo => {
+    todo.classList.add('light');
+    todo.children[1].classList.add('light');
+  });
+});
+
+darkBtn.addEventListener('click', () => {
+  document.body.classList.remove('light');
+  lightBtn.style.display = 'block';
+  darkBtn.style.display = 'none';
+  items.forEach(item => {
+    item.classList.remove('light');
+  });
+  todos.forEach(todo => {
+    todo.classList.remove('light');
+    todo.children[1].classList.remove('light');
+  });
+});
