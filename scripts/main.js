@@ -16,6 +16,7 @@ const showCompleted = document.getElementById('completed');
 const lightBtn = document.querySelector('.light-mode-icon');
 const darkBtn = document.querySelector('.dark-mode-icon');
 const items = document.querySelectorAll('.item');
+const input = document.querySelector('.input-todo');
 
 /* --------- Lists Arrays ----------    */
 let todos = [];
@@ -32,6 +33,7 @@ const addTodo = function (todo) {
 
   li.classList.add('item');
   li.classList.add('todo-item');
+  li.setAttribute('draggable', true);
 
   if (showCompleted.checked) li.style.display = 'none';
 
@@ -114,6 +116,7 @@ showAll.addEventListener('click', renderAll);
 
 lightBtn.addEventListener('click', () => {
   document.body.classList.add('light');
+  input.classList.add('light');
   lightBtn.style.display = 'none';
   darkBtn.style.display = 'block';
   items.forEach(item => {
@@ -128,6 +131,7 @@ lightBtn.addEventListener('click', () => {
 
 darkBtn.addEventListener('click', () => {
   document.body.classList.remove('light');
+  input.classList.remove('light');
   lightBtn.style.display = 'block';
   darkBtn.style.display = 'none';
   items.forEach(item => {
@@ -138,3 +142,63 @@ darkBtn.addEventListener('click', () => {
     todo.children[1].classList.remove('light');
   });
 });
+
+// Drag and drop
+let draggedEl;
+let textToMove;
+
+document.addEventListener(
+  'dragstart',
+  e => {
+    draggedEl = e.target;
+    textToMove = e.target.innerHTML;
+    console.log(draggedEl);
+    if (e.target.classList.contains('todo-item')) e.target.style.opacity = 0.5;
+  },
+  false
+);
+
+document.addEventListener(
+  'dragend',
+  e => {
+    if (e.target.classList.contains('todo-item')) e.target.style.opacity = 1;
+  },
+  false
+);
+
+document.addEventListener(
+  'dragenter',
+  e => {
+    if (e.target.classList.contains('todo-item')) e.target.style.opacity = 0.5;
+  },
+  false
+);
+
+document.addEventListener(
+  'dragleave',
+  e => {
+    if (e.target.classList.contains('todo-item')) e.target.style.opacity = 1;
+  },
+  false
+);
+
+document.addEventListener(
+  'dragover',
+  e => {
+    e.preventDefault();
+  },
+  false
+);
+
+document.addEventListener(
+  'drop',
+  e => {
+    if (e.target.classList.contains('todo-item')) {
+      draggedEl.innerHTML = e.target.innerHTML;
+      e.target.style.opacity = 1;
+
+      e.target.innerHTML = textToMove;
+    }
+  },
+  false
+);
