@@ -138,10 +138,12 @@ button {
   border-bottom: 1px solid hsla(233, 14%, 35%, 0.491);
   position: relative;
   transition: all 0.3s ease-in-out;
+  cursor: move;
+  cursor: -webkit-grabbing;
 }
 
 .todo-item:hover {
-  cursor: pointer;
+  cursor: grabbing;
 }
 
 .todo-li {
@@ -187,7 +189,6 @@ button {
 .todo-text {
   color: var(--light-grayish-blue-dk);
   height: 100%;
-  cursor: pointer;
   width: 75%;
   font-size: 0.8rem;
   padding: 0 0 0.5rem 0.8rem;
@@ -237,8 +238,9 @@ button {
 }
 
 /**** Drag and Drop ****/
-.over {
-  transform: scale(1.1, 1.1);
+
+.ghost {
+  background-color: var(--very-dark-blue);
 }
 
 /****** LIGHT MODE ******/

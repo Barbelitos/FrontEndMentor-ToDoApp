@@ -143,62 +143,9 @@ darkBtn.addEventListener('click', () => {
   });
 });
 
-// Drag and drop
-let draggedEl;
-let textToMove;
+// Drag and Drop
 
-document.addEventListener(
-  'dragstart',
-  e => {
-    draggedEl = e.target;
-    textToMove = e.target.innerHTML;
-    console.log(draggedEl);
-    if (e.target.classList.contains('todo-item')) e.target.style.opacity = 0.5;
-  },
-  false
-);
-
-document.addEventListener(
-  'dragend',
-  e => {
-    if (e.target.classList.contains('todo-item')) e.target.style.opacity = 1;
-  },
-  false
-);
-
-document.addEventListener(
-  'dragenter',
-  e => {
-    if (e.target.classList.contains('todo-item')) e.target.style.opacity = 0.5;
-  },
-  false
-);
-
-document.addEventListener(
-  'dragleave',
-  e => {
-    if (e.target.classList.contains('todo-item')) e.target.style.opacity = 1;
-  },
-  false
-);
-
-document.addEventListener(
-  'dragover',
-  e => {
-    e.preventDefault();
-  },
-  false
-);
-
-document.addEventListener(
-  'drop',
-  e => {
-    if (e.target.classList.contains('todo-item')) {
-      draggedEl.innerHTML = e.target.innerHTML;
-      e.target.style.opacity = 1;
-
-      e.target.innerHTML = textToMove;
-    }
-  },
-  false
-);
+Sortable.create(taskList, {
+  animation: 150,
+  ghostClass: 'ghost',
+});

@@ -17,6 +17,10 @@
     />
     <link rel="stylesheet" href="styles/reset.css" />
     <link rel="stylesheet" href="styles/main.css" />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"
+    ></script>
     <script defer src="./scripts/main.js"></script>
     <title>Frontend Mentor | Todo app</title>
   </head>
@@ -54,13 +58,13 @@
 
     <main class="todos">
       <div class="container">
-        <ul class="todo-list">
-          <!-- <li class="todo-item item">
+        <ul class="todo-list" id="taskList">
+          <li class="todo-item item">
             <label class="task">
               <input type="checkbox" name="checkButton" class="todo-li" />
               <span class="checkmark"></span>
             </label>
-            <p class="todo-text">Home</p>
+            <p class="todo-text">Christmas Shopping</p>
             <img
               class="remove-todo"
               src="./images/icon-cross.svg"
@@ -72,7 +76,7 @@
               <input type="checkbox" name="checkButton" class="todo-li" />
               <span class="checkmark"></span>
             </label>
-            <p class="todo-text">Something to do</p>
+            <p class="todo-text">Clean the house</p>
             <img
               class="remove-todo"
               src="./images/icon-cross.svg"
@@ -84,13 +88,13 @@
               <input type="checkbox" name="checkButton" class="todo-li" />
               <span class="checkmark"></span>
             </label>
-            <p class="todo-text">Something else to do</p>
+            <p class="todo-text">Something else</p>
             <img
               class="remove-todo"
               src="./images/icon-cross.svg"
               alt="delete todo"
             />
-          </li> -->
+          </li>
         </ul>
         <div class="todo-filters">
           <div class="small-filters item">
@@ -125,10 +129,10 @@
             <label class="filter-label" for="completed">Completed</label>
           </div>
         </div>
+        <div class="dragdrop"></div>
       </div>
     </main>
 
     <!-- Add dynamic number -->
-    <!-- Drag and drop to reorder list -->
   </body>
 </html>
