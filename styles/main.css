@@ -137,12 +137,6 @@ button {
 .todo-item {
   border-bottom: 1px solid hsla(233, 14%, 35%, 0.491);
   position: relative;
-  transition: all 0.3s ease-in-out;
-  cursor: move;
-  cursor: -webkit-grabbing;
-}
-
-.todo-item:hover {
   cursor: grabbing;
 }
 
@@ -162,7 +156,6 @@ button {
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  /* transition: all 0.3s ease-in-out; */
 }
 
 .task:hover input ~ .checkmark {

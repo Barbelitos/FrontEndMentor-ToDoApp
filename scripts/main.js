@@ -145,7 +145,9 @@ darkBtn.addEventListener('click', () => {
 
 // Drag and Drop
 
-Sortable.create(taskList, {
-  animation: 150,
+new Sortable(taskList, {
+  animation: 300,
   ghostClass: 'ghost',
+  delay: 200,
+  delayOnTouchOnly: true,
 });
