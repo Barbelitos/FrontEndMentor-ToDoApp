@@ -231,9 +231,8 @@ button {
 }
 
 /**** Drag and Drop ****/
-
-.ghost {
-  background-color: var(--very-dark-blue);
+.drag {
+  transform: scale(1.5);
 }
 
 /****** LIGHT MODE ******/

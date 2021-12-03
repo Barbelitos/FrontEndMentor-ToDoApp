@@ -51,7 +51,8 @@ const addTodo = function (todo) {
 };
 
 const updateCounter = () => {
-  const count = todoList.childElementCount;
+  // const count = todoList.childElementCount;
+  const count = todos.length;
   counter.innerHTML = count;
 };
 
@@ -70,6 +71,47 @@ const renderActive = () => {
 
 const renderAll = () => todos.map(todo => (todo.style.display = 'flex'));
 
+const clearCompleted = () => {
+  todos.map(todo =>
+    todo.classList.contains('checked-item') && completed.includes(todo)
+      ? todo.remove()
+      : ''
+  );
+
+  todos = todos.filter(el => !completed.includes(el));
+  completed = [];
+  updateCounter();
+};
+
+const switchToLight = () => {
+  document.body.classList.add('light');
+  input.classList.add('light');
+  lightBtn.style.display = 'none';
+  darkBtn.style.display = 'block';
+  items.forEach(item => {
+    item.classList.add('light');
+  });
+
+  todos.forEach(todo => {
+    todo.classList.add('light');
+    todo.children[1].classList.add('light');
+  });
+};
+
+const switchToDark = () => {
+  document.body.classList.remove('light');
+  input.classList.remove('light');
+  lightBtn.style.display = 'block';
+  darkBtn.style.display = 'none';
+  items.forEach(item => {
+    item.classList.remove('light');
+  });
+  todos.forEach(todo => {
+    todo.classList.remove('light');
+    todo.children[1].classList.remove('light');
+  });
+};
+
 /* --------- Event Handlers ----------    */
 createTodo.addEventListener('keydown', e => {
   if (!createTodo.value) return;
@@ -85,69 +127,44 @@ todoList.addEventListener('click', e => {
   if (e.target.name === 'checkButton') {
     e.target.parentElement.nextElementSibling.classList.toggle('checked-text');
     e.target.parentElement.parentElement.classList.toggle('checked-item');
+
     if (
       e.target.parentElement.parentElement.classList.contains('checked-item')
     ) {
       completed.push(e.target.parentElement.parentElement);
+      const index = active.indexOf(e.target.parentElement.parentElement);
+      active.splice(index, 1);
+    }
+
+    if (
+      !e.target.parentElement.parentElement.classList.contains('checked-item')
+    ) {
+      const index = completed.indexOf(e.target.parentElement.parentElement);
+      completed.splice(index, 1);
+      active.push(e.target.parentElement.parentElement);
     }
   }
 
   if (e.target.classList[0] === 'remove-todo') {
+    const index = todos.indexOf(e.target.parentElement);
+    todos.splice(index, 1);
     e.target.parentElement.remove();
     updateCounter();
   }
-});
-
-clearDone.addEventListener('click', () => {
-  todos.map(todo =>
-    todo.classList.contains('checked-item') && completed.includes(todo)
-      ? todo.remove()
-      : ''
-  );
-
-  todos = todos.filter(el => !completed.includes(el));
-  completed = [];
-  updateCounter();
 });
 
 showCompleted.addEventListener('click', renderCompleted);
 showActive.addEventListener('click', renderActive);
 showAll.addEventListener('click', renderAll);
 
-lightBtn.addEventListener('click', () => {
-  document.body.classList.add('light');
-  input.classList.add('light');
-  lightBtn.style.display = 'none';
-  darkBtn.style.display = 'block';
-  items.forEach(item => {
-    item.classList.add('light');
-  });
+clearDone.addEventListener('click', clearCompleted);
 
-  todos.forEach(todo => {
-    todo.classList.add('light');
-    todo.children[1].classList.add('light');
-  });
-});
+lightBtn.addEventListener('click', switchToLight);
+darkBtn.addEventListener('click', switchToDark);
 
-darkBtn.addEventListener('click', () => {
-  document.body.classList.remove('light');
-  input.classList.remove('light');
-  lightBtn.style.display = 'block';
-  darkBtn.style.display = 'none';
-  items.forEach(item => {
-    item.classList.remove('light');
-  });
-  todos.forEach(todo => {
-    todo.classList.remove('light');
-    todo.children[1].classList.remove('light');
-  });
-});
-
-// Drag and Drop
-
+/* --------- Drag and Drop ----------    */
 new Sortable(taskList, {
   animation: 300,
-  ghostClass: 'ghost',
   delay: 200,
   delayOnTouchOnly: true,
 });
