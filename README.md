@@ -49,8 +49,6 @@ Users should be able to:
 - CSS
 - Mobile-first workflow
 - [SortableJS](https://www.npmjs.com/package/sortablejs)
-- [Next.js](https://nextjs.org/) - React framework
-- [Styled Components](https://styled-components.com/) - For styles
 
 ### What I learned
 

@@ -137,7 +137,6 @@ button {
 .todo-item {
   border-bottom: 1px solid hsla(233, 14%, 35%, 0.491);
   position: relative;
-  cursor: grabbing;
 }
 
 .todo-li {
