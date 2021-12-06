@@ -1,6 +1,6 @@
 'use strict';
 
-/* --------- Selectors ----------    */
+/* ------------- Selectors ------------- */
 const createTodo = document.getElementById('create-todo');
 const todoList = document.querySelector('.todo-list');
 const todoItem = document.querySelectorAll('.todo-item');
@@ -9,6 +9,7 @@ const removeButton = document.querySelectorAll('.remove-todo');
 const counter = document.querySelector('.items-left');
 const clearDone = document.querySelector('.clear-completed');
 
+const filterLabel = document.querySelectorAll('.filter-label');
 const showAll = document.getElementById('all');
 const showActive = document.getElementById('active');
 const showCompleted = document.getElementById('completed');
@@ -17,13 +18,15 @@ const lightBtn = document.querySelector('.light-mode-icon');
 const darkBtn = document.querySelector('.dark-mode-icon');
 const items = document.querySelectorAll('.item');
 const input = document.querySelector('.input-todo');
+/* --------------------------------------- */
 
-/* --------- Lists Arrays ----------    */
+/* --------- Lists Arrays ---------------- */
 let todos = [];
 let active = [];
 let completed = [];
+/* --------------------------------------- */
 
-/* --------- Functions ----------    */
+/* ------------ Functions ---------------- */
 const addTodo = function (todo) {
   const li = document.createElement('li');
 
@@ -87,6 +90,7 @@ const switchToLight = () => {
   input.classList.add('light');
   lightBtn.style.display = 'none';
   darkBtn.style.display = 'block';
+  clearDone.classList.add('light');
   items.forEach(item => {
     item.classList.add('light');
   });
@@ -95,6 +99,10 @@ const switchToLight = () => {
     todo.classList.add('light');
     todo.children[1].classList.add('light');
   });
+
+  filterLabel.forEach(label => {
+    label.classList.add('light');
+  });
 };
 
 const switchToDark = () => {
@@ -102,14 +110,21 @@ const switchToDark = () => {
   input.classList.remove('light');
   lightBtn.style.display = 'block';
   darkBtn.style.display = 'none';
+  clearDone.classList.remove('light');
   items.forEach(item => {
     item.classList.remove('light');
   });
+
   todos.forEach(todo => {
     todo.classList.remove('light');
     todo.children[1].classList.remove('light');
   });
+
+  filterLabel.forEach(label => {
+    label.classList.remove('light');
+  });
 };
+/* -------------------------------------- */
 
 /* --------- Event Handlers ----------    */
 createTodo.addEventListener('keydown', e => {
@@ -160,8 +175,9 @@ clearDone.addEventListener('click', clearCompleted);
 
 lightBtn.addEventListener('click', switchToLight);
 darkBtn.addEventListener('click', switchToDark);
+/* ------------------------------------- */
 
-/* --------- Drag and Drop ----------    */
+/* ----------- Drag and Drop ----------- */
 new Sortable(taskList, {
   animation: 300,
   delay: 200,

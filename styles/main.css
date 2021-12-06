@@ -158,6 +158,14 @@ button {
   border-radius: 50%;
 }
 
+.checkmark:hover {
+  border-color: linear-gradient(
+    120deg,
+    hsl(192, 100%, 67%),
+    hsl(280, 87%, 65%)
+  );
+}
+
 .task:hover input ~ .checkmark {
   cursor: pointer;
 }
@@ -180,7 +188,6 @@ button {
 }
 
 .todo-text {
-  color: var(--light-grayish-blue-dk);
   height: 100%;
   width: 75%;
   font-size: 0.8rem;
@@ -213,6 +220,14 @@ button {
   border-radius: 0 0 6px 6px;
 }
 
+.clear-completed {
+  transition: all 0.3s ease-out;
+}
+
+.clear-completed:hover {
+  color: var(--very-light-gray);
+}
+
 .main-filters {
   border-radius: 6px;
   justify-content: center;
@@ -225,6 +240,11 @@ button {
 
 .filter-label {
   cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+
+.filter-label:hover {
+  color: var(--very-light-gray);
 }
 
 .filter-radio:checked + .filter-label {
@@ -259,8 +279,31 @@ li.light {
   color: var(--dark-grayish-blue);
 }
 
+.checked-text.light {
+  text-decoration: line-through;
+  color: var(--dark-grayish-blue);
+}
+
 .input-todo.light {
   color: var(--very-dark-grayish-blue);
+}
+
+.clear-completed.light {
+  color: var(--dark-grayish-blue);
+  transition: all 0.3s ease-out;
+}
+
+.clear-completed.light:hover {
+  color: var(--very-dark-blue);
+}
+
+.filter-label.light {
+  color: var(--dark-grayish-blue);
+  transition: all 0.3s ease-out;
+}
+
+.filter-label.light:hover {
+  color: var(--very-dark-blue);
 }
 
 /****** MEDIA QUERIES *******/
@@ -285,6 +328,9 @@ li.light {
     background-color: transparent;
   }
 
+  .main-filters.light {
+    background-color: transparent;
+  }
   .drag-info {
     bottom: 4rem;
   }
