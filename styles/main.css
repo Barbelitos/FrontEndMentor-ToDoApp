@@ -210,6 +210,7 @@ button {
   margin-bottom: 1em;
   justify-content: space-between;
   font-size: 0.8rem;
+  border-radius: 0 0 6px 6px;
 }
 
 .main-filters {
@@ -230,9 +231,9 @@ button {
   color: var(--bright-blue);
 }
 
-/**** Drag and Drop ****/
-.drag {
-  transform: scale(1.5);
+.drag-info {
+  margin: 5rem auto 2rem auto;
+  width: fit-content;
 }
 
 /****** LIGHT MODE ******/
@@ -270,5 +271,21 @@ li.light {
 
   body.light {
     background-image: url('../images/bg-desktop-light.jpg');
+  }
+
+  .small-filters {
+    position: relative;
+  }
+
+  .main-filters {
+    width: 50%;
+    margin: auto;
+    position: relative;
+    top: -60px;
+    background-color: transparent;
+  }
+
+  .drag-info {
+    bottom: 4rem;
   }
 }

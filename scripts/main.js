@@ -51,7 +51,6 @@ const addTodo = function (todo) {
 };
 
 const updateCounter = () => {
-  // const count = todoList.childElementCount;
   const count = todos.length;
   counter.innerHTML = count;
 };
