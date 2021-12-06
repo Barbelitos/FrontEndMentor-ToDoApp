@@ -54,7 +54,7 @@ const addTodo = function (todo) {
 };
 
 const updateCounter = () => {
-  const count = todos.length;
+  const count = active.length;
   counter.innerHTML = count;
 };
 
@@ -124,6 +124,7 @@ const switchToDark = () => {
     label.classList.remove('light');
   });
 };
+
 /* -------------------------------------- */
 
 /* --------- Event Handlers ----------    */
@@ -148,6 +149,7 @@ todoList.addEventListener('click', e => {
       completed.push(e.target.parentElement.parentElement);
       const index = active.indexOf(e.target.parentElement.parentElement);
       active.splice(index, 1);
+      updateCounter();
     }
 
     if (
@@ -156,6 +158,7 @@ todoList.addEventListener('click', e => {
       const index = completed.indexOf(e.target.parentElement.parentElement);
       completed.splice(index, 1);
       active.push(e.target.parentElement.parentElement);
+      updateCounter();
     }
   }
 
